@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <tree :treeData="tree"></tree>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
+import Tree from './components/Tree/Tree';
 
 export default {
   name: 'App',
+  data: () => ({
+    tree: {}
+  }),
   components: {
-    HelloWorld
+    Tree
+  },
+  created() {
+    axios.get('./static/node_modules.json')
+      .then(response => {
+        this.tree = response.data
+      })
+      .catch(error => console.log(error))
   }
 }
 </script>
@@ -24,5 +34,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  background-color: #f5f6fa;
 }
 </style>
