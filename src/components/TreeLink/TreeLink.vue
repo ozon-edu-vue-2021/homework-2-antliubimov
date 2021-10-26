@@ -1,7 +1,7 @@
 <template>
-  <div class="tree-link">
-    <img src="../../assets/link.svg" width="16" height="16">
-    {{ TreeItem.name }}
+  <div @click="highlight" :class="['tree-link', {'highlight': isActive}]">
+    <img src="../../assets/link.svg" width="16" height="16" alt="link">
+    {{ TreeItemData.name }}
   </div>
 </template>
 
@@ -9,11 +9,27 @@
 export default {
   name: "TreeLink",
   props: {
-    TreeItem: Object
+    TreeItemData: Object
+  },
+  data() {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    highlight() {
+      this.isActive = !this.isActive
+    }
   }
 }
 </script>
 
 <style scoped>
-
+  .tree-link {
+    color: #010f93;
+  }
+  .highlight {
+    background-color: #99c794ff;
+    border-radius: 5px;
+  }
 </style>

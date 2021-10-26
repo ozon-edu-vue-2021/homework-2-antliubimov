@@ -1,7 +1,7 @@
 <template>
   <div @click="highlight" :class="['tree-file', {'highlight': isActive}]">
-    <img src="../../assets/file.svg" width="16" height="16">
-    {{ TreeItem.name }}
+    <img src="../../assets/file.svg" width="16" height="16" alt="file">
+    {{ TreeItemData.name }}
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   name: "TreeFile",
   props: {
-    TreeItem: Object
+    TreeItemData: Object
   },
   data() {
     return {
@@ -25,6 +25,9 @@ export default {
 </script>
 
 <style scoped>
+  .tree-file {
+    color: #2f8716ff;
+  }
   .highlight {
     background-color: #0611d642;
     border-radius: 5px;
