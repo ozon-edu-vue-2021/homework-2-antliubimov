@@ -1,10 +1,6 @@
 <template>
   <li class="tree__item">
-    <div  v-if="isDirectory" @click="toggle" :class="['tree-item',{'bold': isOpen}]">
-      <img v-if="isOpen" src="../../assets/folder-open.svg" width="16" height="16" alt="directory">
-      <img v-else src="../../assets/folder-close.svg" width="16" height="16" alt="directory">
-      {{ TreeItemData.name }}
-    </div>
+    <tree-directory v-if="isDirectory" :TreeItemData="TreeItemData" @toggle="onToggle"></tree-directory>
     <tree-file v-else-if="isFile" :TreeItemData="TreeItemData"></tree-file>
     <tree-link v-else-if="isLink" :TreeItemData="TreeItemData"></tree-link>
 
@@ -16,7 +12,7 @@
 </template>
 
 <script>
-
+import TreeDirectory from "../TreeDirectory/TreeDirectory";
 import TreeFile from '../TreeFile/TreeFile';
 import TreeLink from '../TreeLink/TreeLink';
 
@@ -42,11 +38,12 @@ export default {
     },
   },
   methods: {
-    toggle() {
-      this.isOpen = !this.isOpen;
+    onToggle(isToogle) {
+      this.isOpen = isToogle;
     }
   },
   components: {
+    TreeDirectory,
     TreeFile,
     TreeLink,
   }
@@ -56,10 +53,6 @@ export default {
 <style scoped>
   .tree__list {
     padding-left: 20px;
-  }
-
-  .bold {
-    font-weight: bold;
   }
 
   .tree__item {

@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     highlight() {
-      this.isActive = !this.isActive
+      this.isActive = !this.isActive;
     }
   }
 }
