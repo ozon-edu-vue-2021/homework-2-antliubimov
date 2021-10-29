@@ -1,18 +1,24 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <tree-address></tree-address>
+    <tree :treeData="dataTree"></tree>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import dataTree from './../public/static/node_modules.json';
+import Tree from './components/Tree/Tree';
+import TreeAddress from "./components/TreeAddress/TreeAddress";
 
 export default {
   name: 'App',
+  data: () => ({
+    dataTree
+  }),
   components: {
-    HelloWorld
-  }
+    Tree,
+    TreeAddress
+  },
 }
 </script>
 
@@ -24,5 +30,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  background-color: #f5f6fa;
 }
 </style>
