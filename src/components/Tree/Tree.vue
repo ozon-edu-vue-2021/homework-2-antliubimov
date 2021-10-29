@@ -1,7 +1,7 @@
 <template>
   <div class="tree">
     <ul class="tree__list">
-      <tree-item :TreeItemData="treeData"></tree-item>
+      <tree-item :TreeItemData="treeData"/>
     </ul>
   </div>
 </template>

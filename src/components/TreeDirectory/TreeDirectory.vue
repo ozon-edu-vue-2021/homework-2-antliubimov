@@ -1,12 +1,14 @@
 <template>
   <div  @click="toggleDirectory" :class="['tree-item',{'bold': isOpen}]">
-    <img v-if="isOpen" src="../../assets/folder-open.svg" width="16" height="16" alt="directory">
-    <img v-else src="../../assets/folder-close.svg" width="16" height="16" alt="directory">
+    <tree-icon :type="TreeItemData.type" :open="isOpen"/>
     {{ TreeItemData.name }}
   </div>
 </template>
 
 <script>
+import { bus } from '../../main';
+import TreeIcon from "../TreeIcon/TreeIcon";
+
 export default {
   name: "TreeDirectory",
   data() {
@@ -21,7 +23,18 @@ export default {
     toggleDirectory() {
       this.isOpen = !this.isOpen;
       this.$emit('toggle', this.isOpen);
-    }
+
+      let elem = this.$parent;
+      let res = [];
+      while (elem.$options.propsData.TreeItemData !== undefined) {
+        res.push(elem.$options.propsData.TreeItemData.name);
+        elem = elem.$parent;
+      }
+      bus.$emit('addressShow', '/'+res.reverse().join('/'));
+    },
+  },
+  components: {
+    TreeIcon,
   }
 }
 </script>

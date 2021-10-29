@@ -1,28 +1,24 @@
 <template>
   <div id="app">
-    <tree :treeData="tree"></tree>
+    <tree-address></tree-address>
+    <tree :treeData="dataTree"></tree>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import dataTree from './../public/static/node_modules.json';
 import Tree from './components/Tree/Tree';
+import TreeAddress from "./components/TreeAddress/TreeAddress";
 
 export default {
   name: 'App',
   data: () => ({
-    tree: {}
+    dataTree
   }),
   components: {
-    Tree
+    Tree,
+    TreeAddress
   },
-  created() {
-    axios.get('./static/node_modules.json')
-      .then(response => {
-        this.tree = response.data
-      })
-      .catch(error => console.log(error))
-  }
 }
 </script>
 

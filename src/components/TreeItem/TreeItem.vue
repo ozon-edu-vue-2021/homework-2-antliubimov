@@ -1,20 +1,17 @@
 <template>
   <li class="tree__item">
-    <tree-directory v-if="isDirectory" :TreeItemData="TreeItemData" @toggle="onToggle"></tree-directory>
-    <tree-file v-else-if="isFile" :TreeItemData="TreeItemData"></tree-file>
-    <tree-link v-else-if="isLink" :TreeItemData="TreeItemData"></tree-link>
-
+    <tree-directory v-if="isDirectory" :TreeItemData="TreeItemData" @toggle="onToggle"/>
+    <tree-file-link v-else-if="isFileLink" :TreeItemData="TreeItemData"/>
 
     <ul v-show="isOpen" v-if="isDirectory" class="tree__list">
-      <tree-item v-for="(elem, index) in TreeItemData['contents']" :TreeItemData="elem" :key="index"></tree-item>
+      <tree-item v-for="(elem, index) in TreeItemData['contents']" :TreeItemData="elem" :key="index"/>
     </ul>
   </li>
 </template>
 
 <script>
 import TreeDirectory from "../TreeDirectory/TreeDirectory";
-import TreeFile from '../TreeFile/TreeFile';
-import TreeLink from '../TreeLink/TreeLink';
+import TreeFileLink from '../TreeFileLink/TreeFileLink';
 
 export default {
   name: "tree-item",
@@ -30,23 +27,19 @@ export default {
     isDirectory() {
       return this.TreeItemData.type === 'directory'
     },
-    isFile() {
-      return this.TreeItemData.type === 'file'
-    },
-    isLink() {
-      return this.TreeItemData.type === 'link'
+    isFileLink() {
+      return this.TreeItemData.type === 'file' || this.TreeItemData.type === 'link'
     },
   },
   methods: {
     onToggle(isToogle) {
       this.isOpen = isToogle;
-    }
+    },
   },
   components: {
     TreeDirectory,
-    TreeFile,
-    TreeLink,
-  }
+    TreeFileLink,
+  },
 }
 </script>
 

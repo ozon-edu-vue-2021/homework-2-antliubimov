@@ -1,24 +1,23 @@
 <template>
-  <div @click="highlight" :class="['tree-link', {'highlight': isActive}]">
-    <img src="../../assets/link.svg" width="16" height="16" alt="link">
-    {{ TreeItemData.name }}
-  </div>
+    <img :src="computedSrc" :alt="`${type}`" width="16" height="16">
 </template>
 
 <script>
 export default {
-  name: "TreeLink",
+  name: "TreeIcon",
   props: {
-    TreeItemData: Object
+    type: String,
+    open: Boolean,
   },
-  data() {
-    return {
-      isActive: false
-    }
-  },
-  methods: {
-    highlight() {
-      this.isActive = !this.isActive
+  computed: {
+    computedSrc() {
+      return this.isDirectory ? this.isOpenDirectory : require(`../../assets/${this.type}.svg`)
+    },
+    isDirectory() {
+      return this.type === 'directory'
+    },
+    isOpenDirectory() {
+      return this.open ? require(`../../assets/${this.type}-open.svg`) : require(`../../assets/${this.type}-close.svg`)
     }
   }
 }
