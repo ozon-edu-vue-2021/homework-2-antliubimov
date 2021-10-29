@@ -25,11 +25,5 @@ export default {
 </script>
 
 <style scoped>
-  .tree-link {
-    color: #010f93;
-  }
-  .highlight {
-    background-color: #99c794ff;
-    border-radius: 5px;
-  }
+
 </style>
